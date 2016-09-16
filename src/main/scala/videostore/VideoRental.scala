@@ -1,23 +1,9 @@
 package videostore
 
-import cats.data.{OptionT, Xor}
 import cats.free.Free
 import cats.free.Free._
 
 sealed trait VideoRental[A]
-
-object Response {
-
-
-  type Error = String
-
-  type Response[A] = Xor[Error, A]
-  type OptResponse[A] = OptionT[Response, A]
-
-
-}
-
-import videostore.Response._
 
 
 case class AddInventory[Movie, DVD](movie: Movie, cnt: Int) extends VideoRental[Response[Set[DVD]]]
