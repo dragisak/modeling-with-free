@@ -33,3 +33,5 @@ scalacOptions ++= Seq(
 
 
 testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-oD")
+
+scalastyleFailOnError := true
