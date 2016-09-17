@@ -1,8 +1,11 @@
-import cats.data.{OptionT, Xor}
+import cats.data.{Xor, XorT}
+
+import scala.concurrent.Future
 
 package object videostore {
   type Error = String
 
-  type Response[A] = Xor[Error, A]
-  type OptResponse[A] = OptionT[Response, A]
+  type ErrorOr[A] = Xor[Error, A]
+
+  type AsyncErrorOr[A] = XorT[Future, Error, A]
 }
