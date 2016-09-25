@@ -10,7 +10,7 @@ import org.scalatest.prop.PropertyChecks._
 import videostore.VideoRental._
 
 // scalastyle:off magic.number
-abstract class VideoRentalRules[Movie: Arbitrary, DVD](interpreter: VideoRental ~> ErrorOr) extends WordSpec {
+abstract class VideoRentalRules(interpreter: VideoRental.DSL ~> ErrorOr) extends WordSpec {
 
   private implicit val qtys = Gen.choose(1, 100).label("qty")
   private implicit val movies = implicitly[Arbitrary[Movie]].arbitrary.label("movie")
@@ -18,7 +18,7 @@ abstract class VideoRentalRules[Movie: Arbitrary, DVD](interpreter: VideoRental 
   "Video Rental App" should {
 
     "allow me to add DVDs to inventory" in forAll(movies, qtys) { (movie, qty) =>
-      val op = addInventory[Movie, DVD](movie, qty)
+      val op = addInventory(movie, qty)
       val result = op.foldMap(interpreter)
       result shouldBe right
       val Xor.Right(dvds) = result
@@ -27,7 +27,7 @@ abstract class VideoRentalRules[Movie: Arbitrary, DVD](interpreter: VideoRental 
 
     "allow me to rent a DVD" in forAll(movies, qtys) { (movie, qty) =>
       val op = for {
-        dvds <- addInventory[Movie, DVD](movie, qty)
+        dvds <- addInventory(movie, qty)
         dvd = dvds.head
         res <- rentDVD(dvd)
       } yield res
@@ -37,7 +37,7 @@ abstract class VideoRentalRules[Movie: Arbitrary, DVD](interpreter: VideoRental 
 
     "allow me to return a rented a DVD" in forAll(movies, qtys) { (movie, qty) =>
       val op = for {
-        dvds <- addInventory[Movie, DVD](movie, qty)
+        dvds <- addInventory(movie, qty)
         dvd = dvds.head
         _ <- rentDVD(dvd)
         res <- returnDVD(dvd)
@@ -48,7 +48,7 @@ abstract class VideoRentalRules[Movie: Arbitrary, DVD](interpreter: VideoRental 
 
     "prevent me to renting same DVD twice" in forAll(movies, qtys) { (movie, qty) =>
       val op = for {
-        dvds <- addInventory[Movie, DVD](movie, qty)
+        dvds <- addInventory(movie, qty)
         dvd = dvds.head
         _ <- rentDVD(dvd)
         res <- rentDVD(dvd)
@@ -59,19 +59,13 @@ abstract class VideoRentalRules[Movie: Arbitrary, DVD](interpreter: VideoRental 
 
     "find DVD if available" in forAll(movies, qtys) { (movie, qty) =>
       val op = for {
-        dvds <- addInventory[Movie, DVD](movie, qty)
-        res <- searchForDVD[Movie, DVD](movie)
+        dvds <- addInventory(movie, qty)
+        res <- searchForDVD(movie)
       } yield (res, dvds)
-
       val result = op.foldMap(interpreter)
       result shouldBe right
       val Xor.Right((searchRes, dvds)) = result
-      searchRes shouldBe 'definde
-
-      val Some(dvd) = searchRes
-
-      dvds should contain (dvd)
-
+      searchRes shouldBe 'defined
     }
 
   }

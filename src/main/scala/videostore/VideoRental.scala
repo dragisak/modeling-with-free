@@ -3,34 +3,36 @@ package videostore
 import cats.free.Free
 import cats.free.Free._
 
-sealed trait VideoRental[A]
-
-case class AddInventory[Movie, DVD](movie: Movie, qty: Int) extends VideoRental[Set[DVD]]
-
-case class SearchForDVD[Movie, DVD](movie: Movie) extends VideoRental[Option[DVD]]
-
-case class RentDVD[DVD](dvd: DVD) extends VideoRental[Unit]
-
-case class ReturnDVD[DVD](dvd: DVD) extends VideoRental[Unit]
 
 object VideoRental {
 
-  type VideoRentalF[A] = Free[VideoRental, A]
+  sealed trait DSL[A]
 
-  def addInventory[Movie, DVD](movie: Movie, qty: Int): VideoRentalF[Set[DVD]] = {
-    liftF[VideoRental, Set[DVD]](AddInventory(movie, qty))
+  final case class AddInventory(movie: Movie, qty: Int) extends DSL[Set[DVD]]
+
+  final case class SearchForDVD(movie: Movie) extends DSL[Option[DVD]]
+
+  final case class RentDVD(dvd: DVD) extends DSL[Unit]
+
+  final case class ReturnDVD(dvd: DVD) extends DSL[Unit]
+
+
+  type VideoRentalF[A] = Free[DSL, A]
+
+  def addInventory(movie: Movie, qty: Int): VideoRentalF[Set[DVD]] = {
+    liftF[DSL, Set[DVD]](AddInventory(movie, qty))
   }
 
-  def searchForDVD[Movie, DVD](movie: Movie): VideoRentalF[Option[DVD]] = {
-    liftF[VideoRental, Option[DVD]](SearchForDVD(movie))
+  def searchForDVD(movie: Movie): VideoRentalF[Option[DVD]] = {
+    liftF[DSL, Option[DVD]](SearchForDVD(movie))
   }
 
-  def rentDVD[DVD](dvd: DVD): VideoRentalF[Unit] = {
-    liftF[VideoRental, Unit](RentDVD(dvd))
+  def rentDVD(dvd: DVD): VideoRentalF[Unit] = {
+    liftF[DSL, Unit](RentDVD(dvd))
   }
 
-  def returnDVD[DVD](dvd: DVD): VideoRentalF[Unit] = {
-    liftF[VideoRental, Unit](ReturnDVD(dvd))
+  def returnDVD(dvd: DVD): VideoRentalF[Unit] = {
+    liftF[DSL, Unit](ReturnDVD(dvd))
   }
 
 
