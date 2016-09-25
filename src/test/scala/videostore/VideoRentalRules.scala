@@ -7,9 +7,12 @@ import org.scalatest.Matchers._
 import org.scalatest.WordSpec
 import org.scalatest.prop.PropertyChecks._
 import videostore.VideoRental.ops._
+import videostore.impl.VideoStoreInterpreter
 
 // scalastyle:off magic.number
-abstract class VideoRentalRules(interpreter: VideoRental.Interp[ErrorOr]) extends WordSpec {
+abstract class VideoRentalRules(videoStoreImpl: VideoStoreInterpreter[ErrorOr]) extends WordSpec {
+
+  import videoStoreImpl._
 
   private implicit val qtys = Gen.choose(1, 100).label("qty")
   private implicit val movies = implicitly[Arbitrary[Movie]].arbitrary.label("movie")
@@ -18,7 +21,7 @@ abstract class VideoRentalRules(interpreter: VideoRental.Interp[ErrorOr]) extend
 
     "allow me to add DVDs to inventory" in forAll(movies, qtys) { (movie, qty) =>
       val op = addInventory(movie, qty)
-      val result = interpreter.run(op)
+      val result = interpreter().run(op)
       result shouldBe right
       val Xor.Right(dvds) = result
       dvds should have size qty.toLong
@@ -30,7 +33,7 @@ abstract class VideoRentalRules(interpreter: VideoRental.Interp[ErrorOr]) extend
         dvd = dvds.head
         res <- rentDVD(dvd)
       } yield res
-      val result = interpreter.run(op)
+      val result = interpreter().run(op)
       result shouldBe right
     }
 
@@ -41,7 +44,7 @@ abstract class VideoRentalRules(interpreter: VideoRental.Interp[ErrorOr]) extend
         _ <- rentDVD(dvd)
         res <- returnDVD(dvd)
       } yield res
-      val result = interpreter.run(op)
+      val result = interpreter().run(op)
       result shouldBe right
     }
 
@@ -52,7 +55,7 @@ abstract class VideoRentalRules(interpreter: VideoRental.Interp[ErrorOr]) extend
         _ <- rentDVD(dvd)
         res <- rentDVD(dvd)
       } yield res
-      val result = interpreter.run(op)
+      val result = interpreter().run(op)
       result shouldBe left
     }
 
@@ -61,10 +64,12 @@ abstract class VideoRentalRules(interpreter: VideoRental.Interp[ErrorOr]) extend
         dvds <- addInventory(movie, qty)
         res <- searchForDVD(movie)
       } yield (res, dvds)
-      val result = interpreter.run(op)
+      val result = interpreter().run(op)
       result shouldBe right
       val Xor.Right((searchRes, dvds)) = result
       searchRes shouldBe 'defined
+      val Some(dvd) = searchRes
+      dvds should contain(dvd)
     }
 
   }

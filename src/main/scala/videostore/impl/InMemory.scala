@@ -5,9 +5,9 @@ import java.util.UUID
 import cats.data.Xor
 import videostore._
 
-object InMemory {
+object InMemory extends VideoStoreInterpreter[ErrorOr] {
 
-  def inMemory: VideoRental.Interp[ErrorOr] = new VideoRental.Interp[ErrorOr] {
+  override def interpreter(): VideoRental.Interp[ErrorOr] = new VideoRental.Interp[ErrorOr] {
 
     private var movies: Map[Movie, Set[DVD]] = Map()
     private var availableDVDs: Set[DVD] = Set()
