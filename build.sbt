@@ -9,7 +9,7 @@ scalaVersion := "2.11.8"
 resolvers += Resolver.jcenterRepo
 
 libraryDependencies ++= Seq(
-  "com.thangiee" %% "freasy-monad" % "0.2.0",
+  "com.thangiee" %% "freasy-monad" % "0.3.0",
   "org.typelevel" %% "cats" % "0.7.2",
   "org.scalacheck" %% "scalacheck" % "1.13.2" % Test,
   "org.scalatest" %% "scalatest" % "3.0.0" % Test,
