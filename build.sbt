@@ -6,10 +6,15 @@ version := "1.0"
 
 scalaVersion := "2.11.8"
 
-resolvers += Resolver.jcenterRepo
+resolvers ++= Seq(
+  Resolver.jcenterRepo,
+  Resolver.bintrayRepo("projectseptemberinc", "maven"),
+  Resolver.sonatypeRepo("releases")
+)
 
 libraryDependencies ++= Seq(
   "com.thangiee" %% "freasy-monad" % "0.3.0",
+  "com.projectseptember" %% "freek" % "0.6.0",
   "org.typelevel" %% "cats" % "0.7.2",
   "org.scalacheck" %% "scalacheck" % "1.13.2" % Test,
   "org.scalatest" %% "scalatest" % "3.0.0" % Test,
@@ -36,6 +41,10 @@ scalacOptions ++= Seq(
 )
 
 addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full)
+
+addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.0")
+
+addCompilerPlugin("com.milessabin" % "si2712fix-plugin" % "1.2.0" cross CrossVersion.full)
 
 testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-oD")
 

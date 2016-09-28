@@ -7,6 +7,8 @@
 Using [Freasy](https://github.com/Thangiee/Freasy-Monad) and [cats](http://typelevel.org/cats/) Free Monads to model a domain.
 
 
+### Example
+
 Freasy macro allows for very concise code:
 
 ```scala
@@ -27,4 +29,32 @@ override def interpreter() = new VideoRental.Interp[ErrorOr] {
   override def rentDVD(dvd: DVD): ErrorOr[Unit] = ...
   override def returnDVD(dvd: DVD): ErrorOr[Unit] = ...
 }
+```
+
+### Using [Freek](https://github.com/ProjectSeptemberInc/freek)
+
+
+Combine two different Free algebras (as long as they use same return type):
+
+```scala
+type PRG = Logging.DSL :|: VideoRental.DSL :|: NilDSL
+val PRG = DSL.Make[PRG]
+
+val VS = videostore.VideoRental.DSL
+val LOG = videostore.Logging.DSL
+
+val op = for {
+    _     <- LOG.Info(s"Adding $movie").freek[PRG]
+    dvds  <- VS.AddInventory(movie, qty).freek[PRG]
+    dvd   = dvds.head
+    _     <- LOG.Info(s"Renting $dvd").freek[PRG]
+    _     <- VS.RentDVD(dvd).freek[PRG]
+    _     <- LOG.Info(s"Returning $dvd").freek[PRG]
+    res   <- VS.ReturnDVD(dvd).freek[PRG]
+} yield res
+
+val interpreter: Interpreter[PRG.Cop, ErrorOr] = StdoutLogging.interpreter().interpreter :&: InMemory.interpreter().interpreter
+
+
+val result = op.interpret(interpreter)
 ```
