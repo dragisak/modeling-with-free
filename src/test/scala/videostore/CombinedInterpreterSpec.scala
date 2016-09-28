@@ -1,12 +1,11 @@
-package videostore.impl
+package videostore
 
-import org.scalatest.WordSpec
-import videostore._
-import org.scalatest.Matchers._
-import org.scalacheck.{Arbitrary, Gen}
-import org.scalatest.prop.PropertyChecks._
 import cats.scalatest.XorMatchers._
 import freek._
+import org.scalacheck.{Arbitrary, Gen}
+import org.scalatest.Matchers._
+import org.scalatest.WordSpec
+import org.scalatest.prop.PropertyChecks._
 
 // scalastyle:off magic.number
 class CombinedInterpreterSpec extends WordSpec {

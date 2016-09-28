@@ -1,15 +1,15 @@
 package videostore.impl
 
+import cats.Id
 import videostore.Logging.Interp
 import videostore._
-import cats.syntax.xor._
 
-object StdoutLogging extends LoggingInterpreter[ErrorOr] {
-  override def interpreter(): Interp[ErrorOr] = new Logging.Interp[ErrorOr] {
-    override def info(msg: String): ErrorOr[Unit] = println("INFO " + msg).right
+object StdoutLogging extends LoggingInterpreter[Id] {
+  override def interpreter(): Interp[Id] = new Logging.Interp[Id] {
+    override def info(msg: String): Id[Unit] = println("INFO " + msg)
 
-    override def warning(msg: String): ErrorOr[Unit] = println("WARN " + msg).right
+    override def warning(msg: String): Id[Unit] = println("WARN " + msg)
 
-    override def error(msg: String): ErrorOr[Unit] = println("ERROR: " + msg).right
+    override def error(msg: String): Id[Unit] = println("ERROR: " + msg)
   }
 }
