@@ -7,14 +7,14 @@ version := "1.0"
 scalaVersion := "2.11.8"
 
 resolvers ++= Seq(
-  Resolver.jcenterRepo,
   Resolver.bintrayRepo("projectseptemberinc", "maven"),
-  Resolver.sonatypeRepo("releases")
+  Resolver.sonatypeRepo("releases"),
+  Resolver.jcenterRepo
 )
 
 libraryDependencies ++= Seq(
   "com.thangiee" %% "freasy-monad" % "0.3.0",
-  "com.projectseptember" %% "freek" % "0.6.0",
+  "com.projectseptember" %% "freek" % "0.6.1",
   "org.typelevel" %% "cats" % "0.7.2",
   "org.scalacheck" %% "scalacheck" % "1.13.2" % Test,
   "org.scalatest" %% "scalatest" % "3.0.0" % Test,
