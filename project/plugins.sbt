@@ -7,5 +7,3 @@ addSbtPlugin("org.scoverage" % "sbt-scoverage" % "1.3.5")
 addSbtPlugin("com.scalapenos" % "sbt-prompt" % "1.0.0")
 
 addSbtPlugin("com.codacy" % "sbt-codacy-coverage" % "1.3.0")
-
-addSbtPlugin("me.lessis" % "bintray-sbt" % "0.3.0")
