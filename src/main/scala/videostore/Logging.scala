@@ -1,7 +1,7 @@
 package videostore
 
 import cats.free.Free
-import freasymonad.free
+import freasymonad.cats.free
 
 
 @free trait Logging {
