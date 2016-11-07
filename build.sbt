@@ -13,12 +13,12 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "com.thangiee" %% "freasy-monad" % "0.4.0",
-  "com.projectseptember" %% "freek" % "0.6.1",
-  "org.typelevel" %% "cats" % "0.7.2",
-  "org.scalacheck" %% "scalacheck" % "1.13.2" % Test,
+  "com.github.thangiee" %% "freasy-monad" % "0.5.0",
+  "com.projectseptember" %% "freek" % "0.6.5",
+  "org.typelevel" %% "cats" % "0.8.0",
+  "org.scalacheck" %% "scalacheck" % "1.13.4" % Test,
   "org.scalatest" %% "scalatest" % "3.0.0" % Test,
-  "com.ironcorelabs" %% "cats-scalatest" % "1.4.0" % Test
+  "com.ironcorelabs" %% "cats-scalatest" % "2.1.0" % Test
 )
 
 

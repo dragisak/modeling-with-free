@@ -2,7 +2,6 @@ package videostore.impl
 
 import java.util.UUID
 
-import cats.data.Xor
 import videostore._
 
 object InMemory extends VideoStoreInterpreter[ErrorOr] {
@@ -18,11 +17,11 @@ object InMemory extends VideoStoreInterpreter[ErrorOr] {
       val dvds = List.fill(qty)(UUID.randomUUID()).toSet
       movies += movie -> (movies.getOrElse(movie, Set()) ++ dvds)
       availableDVDs ++= dvds
-      Xor.Right(dvds)
+      Right(dvds)
     }
 
     override def searchForDVD(movie: Movie): ErrorOr[Option[DVD]] = {
-      Xor.Right(movies.get(movie) flatMap (_.headOption))
+      Right(movies.get(movie) flatMap (_.headOption))
 
     }
 
@@ -30,9 +29,9 @@ object InMemory extends VideoStoreInterpreter[ErrorOr] {
       if (availableDVDs.contains(dvd)) {
         availableDVDs -= dvd
         rentedDVDs += dvd
-        Xor.Right(())
+        Right(())
       } else {
-        Xor.Left(s"$dvd is not available")
+        Left(s"$dvd is not available")
       }
     }
 
@@ -40,9 +39,9 @@ object InMemory extends VideoStoreInterpreter[ErrorOr] {
       if (rentedDVDs.contains(dvd)) {
         rentedDVDs -= dvd
         availableDVDs += dvd
-        Xor.Right(())
+        Right(())
       } else {
-        Xor.Left(s"$dvd has not been rented")
+        Left(s"$dvd has not been rented")
       }
     }
   }

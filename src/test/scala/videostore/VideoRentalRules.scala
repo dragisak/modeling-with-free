@@ -1,13 +1,13 @@
 package videostore
 
-import cats.data.Xor
-import cats.scalatest.XorMatchers._
+import cats.scalatest.EitherMatchers._
 import org.scalacheck.{Arbitrary, Gen}
 import org.scalatest.Matchers._
 import org.scalatest.WordSpec
 import org.scalatest.prop.PropertyChecks._
 import videostore.VideoRental.ops._
 import videostore.impl.VideoStoreInterpreter
+import cats.instances.either._
 
 // scalastyle:off magic.number
 abstract class VideoRentalRules(videoStoreImpl: VideoStoreInterpreter[ErrorOr]) extends WordSpec {
@@ -23,7 +23,7 @@ abstract class VideoRentalRules(videoStoreImpl: VideoStoreInterpreter[ErrorOr]) 
       val op = addInventory(movie, qty)
       val result = interpreter().run(op)
       result shouldBe right
-      val Xor.Right(dvds) = result
+      val Right(dvds) = result
       dvds should have size qty.toLong
     }
 
@@ -66,7 +66,7 @@ abstract class VideoRentalRules(videoStoreImpl: VideoStoreInterpreter[ErrorOr]) 
       } yield (res, dvds)
       val result = interpreter().run(op)
       result shouldBe right
-      val Xor.Right((searchRes, dvds)) = result
+      val Right((searchRes, dvds)) = result
       searchRes shouldBe 'defined
       val Some(dvd) = searchRes
       dvds should contain(dvd)
