@@ -7,7 +7,7 @@ import org.scalatest.WordSpec
 import org.scalatest.prop.PropertyChecks._
 import videostore.VideoRental.ops._
 import videostore.impl.VideoStoreInterpreter
-import cats.instances.either._
+import cats.implicits._
 
 // scalastyle:off magic.number
 abstract class VideoRentalRules(videoStoreImpl: VideoStoreInterpreter[ErrorOr]) extends WordSpec {

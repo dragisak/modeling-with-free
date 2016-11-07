@@ -22,7 +22,6 @@ object InMemory extends VideoStoreInterpreter[ErrorOr] {
 
     override def searchForDVD(movie: Movie): ErrorOr[Option[DVD]] = {
       Right(movies.get(movie) flatMap (_.headOption))
-
     }
 
     override def rentDVD(dvd: DVD): ErrorOr[Unit] = {
