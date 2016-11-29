@@ -6,4 +6,4 @@ addSbtPlugin("org.scoverage" % "sbt-scoverage" % "1.5.0")
 
 addSbtPlugin("com.scalapenos" % "sbt-prompt" % "1.0.0")
 
-addSbtPlugin("com.codacy" % "sbt-codacy-coverage" % "1.3.6")
+addSbtPlugin("com.codacy" % "sbt-codacy-coverage" % "1.3.7")

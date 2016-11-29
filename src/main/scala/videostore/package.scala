@@ -28,7 +28,7 @@ package object videostore {
     override def apply[A](fa: Id[A]): ErrorOr[A] = Right(fa)
   }
 
-  def interpreter(): Interpreter[PRG.Cop, ErrorOr] = StdoutLogging.interpreter().interpreter.andThen(idToErrorOr) :&: InMemory.interpreter().interpreter
+  val combinedInterpreter: Interpreter[PRG.Cop, ErrorOr] = (StdoutLogging.interpreter().interpreter andThen idToErrorOr) :&: InMemory.interpreter().interpreter
 
 
 }

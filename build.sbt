@@ -14,7 +14,7 @@ resolvers ++= Seq(
 
 libraryDependencies ++= Seq(
   "com.github.thangiee" %% "freasy-monad" % "0.5.0",
-  "com.projectseptember" %% "freek" % "0.6.5" exclude("org.typelevel", "cats-free_2.12.0-RC2" ),
+  "com.projectseptember" %% "freek" % "0.6.5" exclude("org.typelevel", "cats-free_2.12.0-RC2"),
   "org.typelevel" %% "cats" % "0.8.1",
   "org.scalacheck" %% "scalacheck" % "1.13.4" % Test,
   "org.scalatest" %% "scalatest" % "3.0.0" % Test,

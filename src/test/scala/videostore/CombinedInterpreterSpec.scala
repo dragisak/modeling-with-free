@@ -14,8 +14,8 @@ class CombinedInterpreterSpec extends WordSpec {
   private implicit val qtys = Gen.choose(1, 100).label("qty")
   private implicit val movies = implicitly[Arbitrary[Movie]].arbitrary.label("movie")
 
-  val VS = videostore.VideoRental.DSL
-  val LOG = videostore.Logging.DSL
+  private val VS = VideoRental.DSL
+  private val LOG = Logging.DSL
 
   "combined interpreter" should {
     "allow me to return a rented a DVD" in forAll(movies, qtys) { (movie, qty) =>
@@ -29,7 +29,7 @@ class CombinedInterpreterSpec extends WordSpec {
         _ <- LOG.Info(s"Returning $dvd").freek[PRG]
         res <- VS.ReturnDVD(dvd).freek[PRG]
       } yield res
-      val result = op.interpret(interpreter())
+      val result = op.interpret(combinedInterpreter)
       result shouldBe right
     }
   }
