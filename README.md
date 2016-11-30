@@ -12,6 +12,7 @@ Using [Freasy](https://github.com/Thangiee/Freasy-Monad) and [cats](http://typel
 Freasy macro allows for very concise code:
 
 1. Define DSL: 
+
     ```scala
     @free trait VideoRental {
       sealed trait DSL[A]
@@ -23,6 +24,7 @@ Freasy macro allows for very concise code:
     }
     ```
 1. Implement service:
+
     ```scala
     override def interpreter() = new VideoRental.Interp[ErrorOr] {
       override def addInventory(movie: Movie, qty: Int): ErrorOr[Set[DVD]] = ...
