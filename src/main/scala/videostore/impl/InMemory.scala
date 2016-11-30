@@ -6,7 +6,7 @@ import videostore._
 
 object InMemory extends VideoStoreInterpreter[ErrorOr] {
 
-  override def interpreter(): VideoRental.Interp[ErrorOr] = new VideoRental.Interp[ErrorOr] {
+  override def apply(): VideoRental.Interp[ErrorOr] = new VideoRental.Interp[ErrorOr] {
 
     private var movies: Map[Movie, Set[DVD]] = Map()
     private var availableDVDs: Set[DVD] = Set()

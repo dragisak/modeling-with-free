@@ -56,7 +56,7 @@ val program = for {
 } yield res
 
 // Combine interpreters for VideoRental and Logging
-val combinedInterpreter: Interpreter[PRG.Cop, ErrorOr] = StdoutLogging.interpreter().interpreter :&: InMemory.interpreter().interpreter
+val combinedInterpreter: Interpreter[PRG.Cop, ErrorOr] = StdoutLogging().interpreter :&: InMemory().interpreter
 
 val result = program.interpret(combinedInterpreter)
 ```

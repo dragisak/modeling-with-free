@@ -6,13 +6,10 @@ import org.scalatest.Matchers._
 import org.scalatest.WordSpec
 import org.scalatest.prop.PropertyChecks._
 import videostore.VideoRental.ops._
-import videostore.impl.VideoStoreInterpreter
 import cats.implicits._
 
 // scalastyle:off magic.number
-abstract class VideoRentalRules(videoStoreImpl: VideoStoreInterpreter[ErrorOr]) extends WordSpec {
-
-  import videoStoreImpl._
+abstract class VideoRentalRules(interpreter: VideoStoreInterpreter[ErrorOr]) extends WordSpec {
 
   private implicit val qtys = Gen.choose(1, 100).label("qty")
   private implicit val movies = implicitly[Arbitrary[Movie]].arbitrary.label("movie")

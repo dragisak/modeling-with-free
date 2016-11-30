@@ -29,6 +29,7 @@ class CombinedInterpreterSpec extends WordSpec {
         _ <- LOG.Info(s"Returning $dvd").freek[PRG]
         res <- VS.ReturnDVD(dvd).freek[PRG]
       } yield res
+
       val result = op.interpret(combinedInterpreter)
       result shouldBe right
     }

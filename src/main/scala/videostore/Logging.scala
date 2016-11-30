@@ -20,3 +20,6 @@ import freasymonad.cats.free
 
 
 
+trait LoggingInterpreter[F[_]] {
+  def apply(): Logging.Interp[F]
+}
