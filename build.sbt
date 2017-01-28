@@ -25,12 +25,14 @@ libraryDependencies ++= Seq(
 scalacOptions ++= Seq(
   "-feature",
   "-deprecation",
-  "-encoding", "UTF-8", // yes, this is 2 args
+  "-encoding", "UTF-8",
   "-unchecked",
   "-Xfatal-warnings",
   "-Yno-adapted-args",
-  "-Ywarn-dead-code", // N.B. doesn't work well with the ??? hole
+  "-Ywarn-dead-code",
   "-Ywarn-numeric-widen",
+  "-Ywarn-inaccessible",
+  "-Ywarn-dead-code",
   "-Ywarn-value-discard",
   "-Ywarn-unused-import",
   "-Xfuture",
@@ -48,3 +50,5 @@ addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.3")
 testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-oD")
 
 scalastyleFailOnError := true
+
+logBuffered in Test := false
