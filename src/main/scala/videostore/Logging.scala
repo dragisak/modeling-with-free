@@ -17,9 +17,3 @@ import freasymonad.cats.free
   def error(msg: String): LoggingF[Unit]
 
 }
-
-
-
-trait LoggingInterpreter[F[_]] {
-  def apply(): Logging.Interp[F]
-}

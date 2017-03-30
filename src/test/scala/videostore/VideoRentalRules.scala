@@ -9,7 +9,7 @@ import videostore.VideoRental.ops._
 import cats.implicits._
 
 // scalastyle:off magic.number
-abstract class VideoRentalRules(interpreter: VideoStoreInterpreter[ErrorOr]) extends WordSpec {
+abstract class VideoRentalRules(interpreter: VideoRental.Interp[ErrorOr]) extends WordSpec {
 
   private implicit val qtys = Gen.choose(1, 100).label("qty")
   private implicit val movies = implicitly[Arbitrary[Movie]].arbitrary.label("movie")
@@ -18,7 +18,7 @@ abstract class VideoRentalRules(interpreter: VideoStoreInterpreter[ErrorOr]) ext
 
     "allow me to add DVDs to inventory" in forAll(movies, qtys) { (movie, qty) =>
       val op = addInventory(movie, qty)
-      val result = interpreter().run(op)
+      val result = interpreter.run(op)
       result shouldBe right
       val Right(dvds) = result
       dvds should have size qty.toLong
@@ -30,7 +30,7 @@ abstract class VideoRentalRules(interpreter: VideoStoreInterpreter[ErrorOr]) ext
         dvd = dvds.head
         res <- rentDVD(dvd)
       } yield res
-      val result = interpreter().run(op)
+      val result = interpreter.run(op)
       result shouldBe right
     }
 
@@ -41,7 +41,7 @@ abstract class VideoRentalRules(interpreter: VideoStoreInterpreter[ErrorOr]) ext
         _ <- rentDVD(dvd)
         res <- returnDVD(dvd)
       } yield res
-      val result = interpreter().run(op)
+      val result = interpreter.run(op)
       result shouldBe right
     }
 
@@ -52,7 +52,7 @@ abstract class VideoRentalRules(interpreter: VideoStoreInterpreter[ErrorOr]) ext
         _ <- rentDVD(dvd)
         res <- rentDVD(dvd)
       } yield res
-      val result = interpreter().run(op)
+      val result = interpreter.run(op)
       result shouldBe left
     }
 
@@ -61,7 +61,7 @@ abstract class VideoRentalRules(interpreter: VideoStoreInterpreter[ErrorOr]) ext
         dvds <- addInventory(movie, qty)
         res <- searchForDVD(movie)
       } yield (res, dvds)
-      val result = interpreter().run(op)
+      val result = interpreter.run(op)
       result shouldBe right
       val Right((searchRes, dvds)) = result
       searchRes shouldBe 'defined

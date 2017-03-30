@@ -21,9 +21,3 @@ import freasymonad.cats.free
 }
 
 
-
-trait VideoStoreInterpreter[F[_]] {
-
-  def apply(): VideoRental.Interp[F]
-
-}

@@ -9,11 +9,12 @@ scalaVersion := "2.12.1"
 resolvers ++= Seq(
   Resolver.bintrayRepo("projectseptemberinc", "maven"),
   Resolver.sonatypeRepo("releases"),
+  Resolver.sonatypeRepo("snapshots"),
   Resolver.jcenterRepo
 )
 
 libraryDependencies ++= Seq(
-  "com.github.thangiee" %% "freasy-monad" % "0.5.0",
+  "com.github.thangiee" %% "freasy-monad" % "0.6.0-SNAPSHOT",
   "com.projectseptember" %% "freek" % "0.6.6",
   "org.typelevel" %% "cats" % "0.9.0",
   "org.scalacheck" %% "scalacheck" % "1.13.4" % Test,
@@ -43,7 +44,7 @@ scalacOptions ++= Seq(
   "-Ypartial-unification"
 )
 
-addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full)
+addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M7" cross CrossVersion.full)
 
 addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.3")
 
