@@ -15,9 +15,9 @@ resolvers ++= Seq(
 
 libraryDependencies ++= Seq(
   "com.github.thangiee" %% "freasy-monad" % "0.6.0-SNAPSHOT",
-  "com.projectseptember" %% "freek" % "0.6.6",
+  "com.projectseptember" %% "freek" % "0.6.7",
   "org.typelevel" %% "cats" % "0.9.0",
-  "org.scalacheck" %% "scalacheck" % "1.13.4" % Test,
+  "org.scalacheck" %% "scalacheck" % "1.13.5" % Test,
   "org.scalatest" %% "scalatest" % "3.0.1" % Test,
   "com.ironcorelabs" %% "cats-scalatest" % "2.2.0" % Test
 )
@@ -45,8 +45,6 @@ scalacOptions ++= Seq(
 )
 
 addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M7" cross CrossVersion.full)
-
-addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.3")
 
 testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-oD")
 
