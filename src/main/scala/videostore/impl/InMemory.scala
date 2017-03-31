@@ -4,7 +4,7 @@ import java.util.UUID
 
 import videostore._
 
-object InMemory extends VideoRental.Interp[ErrorOr] {
+class InMemory extends VideoRental.Interp[ErrorOr] {
 
   private var movies: Map[Movie, Set[DVD]] = Map()
   private var availableDVDs: Set[DVD] = Set()

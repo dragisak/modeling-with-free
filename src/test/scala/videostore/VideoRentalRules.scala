@@ -9,7 +9,9 @@ import videostore.VideoRental.ops._
 import cats.implicits._
 
 // scalastyle:off magic.number
-abstract class VideoRentalRules(interpreter: VideoRental.Interp[ErrorOr]) extends WordSpec {
+trait VideoRentalRules extends WordSpec {
+
+  def interpreter: VideoRental.Interp[ErrorOr]
 
   private implicit val qtys = Gen.choose(1, 100).label("qty")
   private implicit val movies = implicitly[Arbitrary[Movie]].arbitrary.label("movie")
