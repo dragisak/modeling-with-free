@@ -48,6 +48,8 @@ addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M7" cross CrossVersion.f
 
 testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-oD")
 
+coverageHighlighting := false
+
 scalastyleFailOnError := true
 
 logBuffered in Test := false
