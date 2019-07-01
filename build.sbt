@@ -6,20 +6,13 @@ version := "1.0"
 
 scalaVersion := "2.12.8"
 
-resolvers ++= Seq(
-  Resolver.bintrayRepo("projectseptemberinc", "maven"),
-  Resolver.sonatypeRepo("releases"),
-  Resolver.sonatypeRepo("snapshots"),
-  Resolver.jcenterRepo
-)
+val catsVersion = "2.0.0-M4"
 
 libraryDependencies ++= Seq(
-  "com.github.thangiee" %% "freasy-monad" % "0.6.0",
-  "com.projectseptember" %% "freek" % "0.6.7",
-  "org.typelevel" %% "cats" % "0.9.0",
-  "org.scalacheck" %% "scalacheck" % "1.13.5" % Test,
-  "org.scalatest" %% "scalatest" % "3.0.1" % Test,
-  "com.ironcorelabs" %% "cats-scalatest" % "2.2.0" % Test
+  "org.typelevel"    %% "cats-free"      % catsVersion,
+  "org.scalacheck"   %% "scalacheck"     % "1.14.0" % Test,
+  "org.scalatest"    %% "scalatest"      % "3.0.8" % Test,
+  "com.ironcorelabs" %% "cats-scalatest" % "2.4.1" % Test
 )
 
 scalacOptions ++= Seq(
@@ -28,7 +21,7 @@ scalacOptions ++= Seq(
   "-encoding",
   "UTF-8",
   "-unchecked",
-  "-Xfatal-warnings",
+  // "-Xfatal-warnings",
   "-Yno-adapted-args",
   "-Ywarn-dead-code",
   "-Ywarn-numeric-widen",
@@ -44,14 +37,4 @@ scalacOptions ++= Seq(
   "-Ypartial-unification"
 )
 
-addCompilerPlugin(
-  "org.scalameta" % "paradise" % "3.0.0-M11" cross CrossVersion.full
-)
-
 testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-oD")
-
-coverageHighlighting := false
-
-scalastyleFailOnError := true
-
-logBuffered in Test := false

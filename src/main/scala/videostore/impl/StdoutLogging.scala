@@ -1,12 +1,17 @@
 package videostore.impl
 
 import cats.Id
-import videostore._
 
-object StdoutLogging extends Logging.Interp[Id] {
-    override def info(msg: String): Id[Unit] = println("INFO " + msg)
+import videostore.Logging._
 
-    override def warning(msg: String): Id[Unit] = println("WARN " + msg)
+object StdoutLogging {
 
-    override def error(msg: String): Id[Unit] = println("ERROR: " + msg)
+  val interpreter: Interpreter[Id] = new Interpreter[Id] {
+
+    override def apply[A](fa: DSL[A]): Id[A] = fa match {
+      case Info(msg)    => println("INFO: " + msg)
+      case Warning(msg) => println("WARN: " + msg)
+      case Error(msg)   => println("ERROR: " + msg)
+    }
+  }
 }

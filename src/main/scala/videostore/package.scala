@@ -1,9 +1,6 @@
 import java.util.UUID
 
-import cats.data.EitherT
-import cats.{Id, ~>}
-import freek._
-import videostore.impl.{InMemory, StdoutLogging}
+import cats.data.{EitherK, EitherT}
 
 import scala.concurrent.Future
 
@@ -19,16 +16,5 @@ package object videostore {
 
   type AsyncErrorOr[A] = EitherT[Future, Error, A]
 
-  type PRG = Logging.DSL :|: VideoRental.DSL :|: NilDSL
-
-  val PRG = DSL.Make[PRG]
-
-
-  val idToErrorOr: Id ~> ErrorOr = new (Id ~> ErrorOr) {
-    override def apply[A](fa: Id[A]): ErrorOr[A] = Right(fa)
-  }
-
-  def combinedInterpreter: Interpreter[PRG.Cop, ErrorOr] = (StdoutLogging andThen idToErrorOr) :&: new InMemory()
-
-
+  type Program[A] = EitherK[Logging.DSL, VideoRental.DSL, A]
 }
