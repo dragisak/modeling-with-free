@@ -14,6 +14,7 @@ object InMemory {
   val interpreter: Interpreter[ErrorOr] = new Interpreter[ErrorOr] {
 
     override def apply[A](fa: DSL[A]): ErrorOr[A] = fa match {
+
       case AddInventory(movie, qty) =>
         val dvds = List.fill(qty)(UUID.randomUUID()).toSet
         movies += movie -> (movies.getOrElse(movie, Set()) ++ dvds)
