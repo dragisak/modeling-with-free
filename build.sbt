@@ -4,7 +4,7 @@ name := "modeling-with-free"
 
 version := "1.0"
 
-scalaVersion := "2.12.1"
+scalaVersion := "2.12.8"
 
 resolvers ++= Seq(
   Resolver.bintrayRepo("projectseptemberinc", "maven"),
@@ -14,7 +14,7 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "com.github.thangiee" %% "freasy-monad" % "0.6.0-SNAPSHOT",
+  "com.github.thangiee" %% "freasy-monad" % "0.6.0",
   "com.projectseptember" %% "freek" % "0.6.7",
   "org.typelevel" %% "cats" % "0.9.0",
   "org.scalacheck" %% "scalacheck" % "1.13.5" % Test,
@@ -22,11 +22,11 @@ libraryDependencies ++= Seq(
   "com.ironcorelabs" %% "cats-scalatest" % "2.2.0" % Test
 )
 
-
 scalacOptions ++= Seq(
   "-feature",
   "-deprecation",
-  "-encoding", "UTF-8",
+  "-encoding",
+  "UTF-8",
   "-unchecked",
   "-Xfatal-warnings",
   "-Yno-adapted-args",
@@ -44,7 +44,9 @@ scalacOptions ++= Seq(
   "-Ypartial-unification"
 )
 
-addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M7" cross CrossVersion.full)
+addCompilerPlugin(
+  "org.scalameta" % "paradise" % "3.0.0-M11" cross CrossVersion.full
+)
 
 testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-oD")
 
