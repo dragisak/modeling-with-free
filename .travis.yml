@@ -8,7 +8,7 @@ cache:
     - $HOME/.m2
     - $HOME/.ivy2
 script:
-  - sbt ++$TRAVIS_SCALA_VERSION '; scalastyle; coverage; test'
+  - sbt ++$TRAVIS_SCALA_VERSION '; coverage; test'
 after_success:
   - sbt ++$TRAVIS_SCALA_VERSION coverageReport
   - sbt ++$TRAVIS_SCALA_VERSION codacyCoverage
