@@ -43,7 +43,8 @@ trait VideoRentalLaws[F[_]] extends Laws {
       _    <- videoRental.rentDVD(dvd)
       _    <- videoRental.rentDVD(dvd)
     } yield false
-    op.recover { case err => err.nonEmpty } <-> M.pure(true)
+
+    op.handleError(_.nonEmpty) <-> M.pure(true)
   }
 
   def findIfDvdIsAvailable(movie: Movie, qty: Int) = {
