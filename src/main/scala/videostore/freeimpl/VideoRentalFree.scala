@@ -16,7 +16,7 @@ object VideoRentalFree {
   final case class RentDVD(dvd: DVD)                    extends DSL[Unit]
   final case class ReturnDVD(dvd: DVD)                  extends DSL[Unit]
 
-  implicit def apply[F[_]](implicit I: InjectK[DSL, F]): VideoRentalFree[F] = new VideoRentalFree[F]
+  def apply[F[_]](implicit I: InjectK[DSL, F]): VideoRentalFree[F] = new VideoRentalFree[F]
 
 }
 

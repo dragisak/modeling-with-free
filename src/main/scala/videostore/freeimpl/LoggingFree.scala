@@ -15,7 +15,7 @@ object LoggingFree {
   final case class Warning(msg: String) extends DSL[Unit]
   final case class Error(msg: String)   extends DSL[Unit]
 
-  implicit def apply[F[_]](implicit I: InjectK[DSL, F]): LoggingFree[F] = new LoggingFree[F]
+  def apply[F[_]](implicit I: InjectK[DSL, F]): LoggingFree[F] = new LoggingFree[F]
 
 }
 
