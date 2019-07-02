@@ -19,8 +19,7 @@ libraryDependencies ++= Seq(
   "org.scalatest"  %% "scalatest"        % "3.0.8" % Test
 )
 
-addCompilerPlugin("org.typelevel" %% "kind-projector"     % "0.10.3")
-addCompilerPlugin("com.olegpy"    %% "better-monadic-for" % "0.3.0")
+addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.10.3")
 
 scalacOptions ++= Seq(
   "-feature",
