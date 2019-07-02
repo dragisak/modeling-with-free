@@ -16,7 +16,8 @@ libraryDependencies ++= Seq(
   "dev.zio"        %% "zio"              % zioVersion,
   "dev.zio"        %% "zio-interop-cats" % zioCatsVersion,
   "org.scalacheck" %% "scalacheck"       % "1.14.0" % Test,
-  "org.scalatest"  %% "scalatest"        % "3.0.8" % Test
+  "org.scalatest"  %% "scalatest"        % "3.0.8" % Test,
+  "org.typelevel"  %% "cats-testkit"     % catsVersion % Test
 )
 
 addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.10.3")
