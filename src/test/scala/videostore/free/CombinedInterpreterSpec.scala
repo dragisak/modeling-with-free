@@ -1,20 +1,20 @@
-package videostore
+package videostore.free
 
-import cats.scalatest.EitherMatchers._
 import cats.implicits._
+import cats.scalatest.EitherMatchers._
 import org.scalacheck.{Arbitrary, Gen}
 import org.scalatest.Matchers._
 import org.scalatest.WordSpec
 import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks._
-import videostore.impl.Combined
+import videostore.Movie
 
 class CombinedInterpreterSpec extends WordSpec {
 
   private implicit val qtys   = Gen.choose(1, 100).label("qty")
   private implicit val movies = implicitly[Arbitrary[Movie]].arbitrary.label("movie")
 
-  private val log         = Logging[Program]
-  private val videoRental = VideoRental[Program]
+  private val log         = LoggingFree[Program]
+  private val videoRental = VideoRentalFree[Program]
 
   "combined interpreter" should {
     "allow me to return a rented a DVD" in forAll(movies, qtys) { (movie, qty) =>

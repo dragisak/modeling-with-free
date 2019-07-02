@@ -1,9 +1,5 @@
 import java.util.UUID
 
-import cats.data.{EitherK, EitherT}
-
-import scala.concurrent.Future
-
 package object videostore {
 
   type Movie = String
@@ -14,7 +10,4 @@ package object videostore {
 
   type ErrorOr[A] = Either[Error, A]
 
-  type AsyncErrorOr[A] = EitherT[Future, Error, A]
-
-  type Program[A] = EitherK[Logging.DSL, VideoRental.DSL, A]
 }

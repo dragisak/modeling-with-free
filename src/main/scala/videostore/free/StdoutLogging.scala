@@ -1,8 +1,8 @@
-package videostore.impl
+package videostore.free
 
 import cats.Id
 
-import videostore.Logging._
+import LoggingFree._
 
 object StdoutLogging {
 

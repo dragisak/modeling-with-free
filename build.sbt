@@ -15,6 +15,8 @@ libraryDependencies ++= Seq(
   "com.ironcorelabs" %% "cats-scalatest" % "2.4.1" % Test
 )
 
+addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.10.3")
+
 scalacOptions ++= Seq(
   "-feature",
   "-deprecation",

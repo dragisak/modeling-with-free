@@ -1,10 +1,10 @@
-package videostore
+package videostore.free
 
 import cats.free.Free
 import cats.{InjectK, ~>}
-import videostore.Logging._
+import LoggingFree._
 
-object Logging {
+object LoggingFree {
 
   sealed trait DSL[A]
 
@@ -14,11 +14,11 @@ object Logging {
   final case class Warning(msg: String) extends DSL[Unit]
   final case class Error(msg: String)   extends DSL[Unit]
 
-  implicit def apply[F[_]](implicit I: InjectK[DSL, F]): Logging[F] = new Logging[F]
+  implicit def apply[F[_]](implicit I: InjectK[DSL, F]): LoggingFree[F] = new LoggingFree[F]
 
 }
 
-class Logging[F[_]](implicit I: InjectK[DSL, F]) {
+class LoggingFree[F[_]](implicit I: InjectK[DSL, F]) {
   def info(msg: String): Free[F, Unit]    = Free.inject(Info(msg))
   def warning(msg: String): Free[F, Unit] = Free.inject(Warning(msg))
   def error(msg: String): Free[F, Unit]   = Free.inject(Error(msg))

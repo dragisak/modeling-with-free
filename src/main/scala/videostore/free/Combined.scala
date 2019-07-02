@@ -1,7 +1,7 @@
-package videostore.impl
+package videostore.free
 
 import cats.{Id, ~>}
-import videostore.{ErrorOr, Program}
+import videostore.ErrorOr
 
 object Combined {
 

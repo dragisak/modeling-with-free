@@ -1,10 +1,10 @@
-package videostore.impl
+package videostore.free
 
 import java.util.UUID
 import java.util.concurrent.{ConcurrentHashMap, ConcurrentMap}
 
 import videostore.{DVD, ErrorOr, Movie}
-import videostore.VideoRental._
+import VideoRentalFree._
 import scala.collection.JavaConverters._
 
 object InMemory {

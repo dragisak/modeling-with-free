@@ -1,17 +1,17 @@
-package videostore
+package videostore.free
 
+import cats.implicits._
 import cats.scalatest.EitherMatchers._
 import org.scalacheck.{Arbitrary, Gen}
 import org.scalatest.Matchers._
 import org.scalatest.WordSpec
 import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks._
-import cats.implicits._
-import videostore.impl.Combined
+import videostore.Movie
 
 class VideoRentalRules extends WordSpec {
 
   private val interpreter = Combined.interpreter
-  private val videoRental = VideoRental[Program]
+  private val videoRental = VideoRentalFree[Program]
 
   private implicit val qtys: Gen[Int]     = Gen.choose(1, 100).label("qty")
   private implicit val movies: Gen[Movie] = implicitly[Arbitrary[Movie]].arbitrary.label("movie")
