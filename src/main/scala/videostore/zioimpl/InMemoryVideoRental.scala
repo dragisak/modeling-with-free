@@ -9,6 +9,7 @@ import zio.IO
 import scala.collection.JavaConverters._
 
 object InMemoryVideoRental extends VideoRental[TaskOrError] {
+
   private val movies: ConcurrentMap[Movie, Set[DVD]]  = new ConcurrentHashMap[Movie, Set[DVD]]() {}
   private val availableDVDs: ConcurrentMap[DVD, Unit] = new ConcurrentHashMap[DVD, Unit]()
   private val rentedDVDs: ConcurrentMap[DVD, Unit]    = new ConcurrentHashMap[DVD, Unit]()
