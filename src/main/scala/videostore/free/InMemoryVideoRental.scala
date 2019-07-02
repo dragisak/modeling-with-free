@@ -7,7 +7,7 @@ import videostore.{DVD, ErrorOr, Movie}
 import VideoRentalFree._
 import scala.collection.JavaConverters._
 
-object InMemory {
+object InMemoryVideoRental {
 
   private val movies: ConcurrentMap[Movie, Set[DVD]]  = new ConcurrentHashMap[Movie, Set[DVD]]() {}
   private val availableDVDs: ConcurrentMap[DVD, Unit] = new ConcurrentHashMap[DVD, Unit]()

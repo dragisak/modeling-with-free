@@ -1,7 +1,6 @@
 package videostore.free
 
 import cats.implicits._
-import cats.scalatest.EitherMatchers._
 import org.scalacheck.{Arbitrary, Gen}
 import org.scalatest.Matchers._
 import org.scalatest.WordSpec
@@ -21,7 +20,7 @@ class VideoRentalRules extends WordSpec {
     "allow me to add DVDs to inventory" in forAll(movies, qtys) { (movie, qty) =>
       val op     = videoRental.addInventory(movie, qty)
       val result = op.foldMap(interpreter)
-      result shouldBe right
+      result shouldBe 'right
       val Right(dvds) = result
       dvds should have size qty.toLong
     }
@@ -33,7 +32,7 @@ class VideoRentalRules extends WordSpec {
         res  <- videoRental.rentDVD(dvd)
       } yield res
       val result = op.foldMap(interpreter)
-      result shouldBe right
+      result shouldBe 'right
     }
 
     "allow me to return a rented a DVD" in forAll(movies, qtys) { (movie, qty) =>
@@ -44,7 +43,7 @@ class VideoRentalRules extends WordSpec {
         res  <- videoRental.returnDVD(dvd)
       } yield res
       val result = op.foldMap(interpreter)
-      result shouldBe right
+      result shouldBe 'right
     }
 
     "prevent me to renting same DVD twice" in forAll(movies, qtys) { (movie, qty) =>
@@ -55,7 +54,7 @@ class VideoRentalRules extends WordSpec {
         res  <- videoRental.rentDVD(dvd)
       } yield res
       val result = op.foldMap(interpreter)
-      result shouldBe left
+      result shouldBe 'left
     }
 
     "find DVD if available" in forAll(movies, qtys) { (movie, qty) =>
@@ -64,7 +63,7 @@ class VideoRentalRules extends WordSpec {
         res  <- videoRental.searchForDVD(movie)
       } yield (res, dvds)
       val result = op.foldMap(interpreter)
-      result shouldBe right
+      result shouldBe 'right
       val Right((searchRes, dvds)) = result
       searchRes shouldBe 'defined
     }

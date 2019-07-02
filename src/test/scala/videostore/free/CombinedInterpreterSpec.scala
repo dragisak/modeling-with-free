@@ -1,7 +1,6 @@
 package videostore.free
 
 import cats.implicits._
-import cats.scalatest.EitherMatchers._
 import org.scalacheck.{Arbitrary, Gen}
 import org.scalatest.Matchers._
 import org.scalatest.WordSpec
@@ -29,7 +28,7 @@ class CombinedInterpreterSpec extends WordSpec {
       } yield res
 
       val result = op.foldMap(Combined.interpreter)
-      result shouldBe right
+      result shouldBe 'right
     }
   }
 

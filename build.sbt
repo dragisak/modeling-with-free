@@ -6,13 +6,16 @@ version := "1.0"
 
 scalaVersion := "2.12.8"
 
-val catsVersion = "2.0.0-M4"
+val catsVersion    = "2.0.0-M4"
+val zioVersion     = "1.0.0-RC9"
+val zioCatsVersion = "1.3.1.0-RC2"
 
 libraryDependencies ++= Seq(
-  "org.typelevel"    %% "cats-free"      % catsVersion,
-  "org.scalacheck"   %% "scalacheck"     % "1.14.0" % Test,
-  "org.scalatest"    %% "scalatest"      % "3.0.8" % Test,
-  "com.ironcorelabs" %% "cats-scalatest" % "2.4.1" % Test
+  "org.typelevel"  %% "cats-free"        % catsVersion,
+  "dev.zio"        %% "zio"              % zioVersion,
+  "dev.zio"        %% "zio-interop-cats" % zioCatsVersion,
+  "org.scalacheck" %% "scalacheck"       % "1.14.0" % Test,
+  "org.scalatest"  %% "scalatest"        % "3.0.8" % Test
 )
 
 addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.10.3")
