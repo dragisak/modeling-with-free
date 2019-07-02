@@ -1,4 +1,4 @@
-package videostore.free
+package videostore.freeimpl
 
 import cats.implicits._
 import org.scalacheck.{Arbitrary, Gen}

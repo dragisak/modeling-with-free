@@ -12,6 +12,7 @@ val zioCatsVersion = "1.3.1.0-RC2"
 
 libraryDependencies ++= Seq(
   "org.typelevel"  %% "cats-free"        % catsVersion,
+  "org.typelevel"  %% "cats-effect"      % catsVersion,
   "dev.zio"        %% "zio"              % zioVersion,
   "dev.zio"        %% "zio-interop-cats" % zioCatsVersion,
   "org.scalacheck" %% "scalacheck"       % "1.14.0" % Test,

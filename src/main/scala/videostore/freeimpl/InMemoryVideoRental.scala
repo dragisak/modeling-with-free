@@ -1,4 +1,4 @@
-package videostore.free
+package videostore.freeimpl
 
 import java.util.UUID
 import java.util.concurrent.{ConcurrentHashMap, ConcurrentMap}

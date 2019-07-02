@@ -1,4 +1,4 @@
-package videostore.free
+package videostore.freeimpl
 
 import cats.free.Free
 import cats.{InjectK, ~>}
