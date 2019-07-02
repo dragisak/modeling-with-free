@@ -3,11 +3,11 @@ package videostore.freeimpl
 import cats.implicits._
 import org.scalacheck.{Arbitrary, Gen}
 import org.scalatest.Matchers._
-import org.scalatest.WordSpec
+import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks._
 import videostore.Movie
 
-class CombinedInterpreterSpec extends WordSpec {
+class CombinedInterpreterTest extends AnyWordSpec {
 
   private implicit val qtys   = Gen.choose(1, 100).label("qty")
   private implicit val movies = implicitly[Arbitrary[Movie]].arbitrary.label("movie")

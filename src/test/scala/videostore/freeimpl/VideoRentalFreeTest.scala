@@ -3,11 +3,11 @@ package videostore.freeimpl
 import cats.implicits._
 import org.scalacheck.{Arbitrary, Gen}
 import org.scalatest.Matchers._
-import org.scalatest.WordSpec
+import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks._
 import videostore.Movie
 
-class VideoRentalRules extends WordSpec {
+class VideoRentalFreeTest extends AnyWordSpec {
 
   private val interpreter = Combined.interpreter
   private val videoRental = VideoRentalFree[Combined.Program]
