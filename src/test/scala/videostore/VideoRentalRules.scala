@@ -67,8 +67,6 @@ class VideoRentalRules extends WordSpec {
       result shouldBe right
       val Right((searchRes, dvds)) = result
       searchRes shouldBe 'defined
-      val Some(dvd) = searchRes
-      dvds should contain(dvd)
     }
 
   }
