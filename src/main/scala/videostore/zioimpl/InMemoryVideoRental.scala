@@ -37,7 +37,7 @@ object InMemoryVideoRental extends VideoRental[TaskOrError] {
               rentedDVDs.put(dvd, ())
             }
           } else {
-            IO.fail("$dvd is not available")
+            IO.fail(s"$dvd is not available")
           }
     } yield ()
 
