@@ -10,7 +10,7 @@ import videostore.Movie
 class VideoRentalRules extends WordSpec {
 
   private val interpreter = Combined.interpreter
-  private val videoRental = VideoRentalFree[Program]
+  private val videoRental = VideoRentalFree[Combined.Program]
 
   private implicit val qtys: Gen[Int]     = Gen.choose(1, 100).label("qty")
   private implicit val movies: Gen[Movie] = implicitly[Arbitrary[Movie]].arbitrary.label("movie")
