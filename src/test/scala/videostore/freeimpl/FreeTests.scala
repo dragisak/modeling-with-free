@@ -9,9 +9,7 @@ trait FreeTests {
 
   implicit def errorOrEq[A: Eq]: Eq[ErrorOr[A]] = Eq.fromUniversalEquals
 
-  type FreeProgram[A] = Free[Combined.Program, ErrorOr[A]]
-
-  implicit def taskEq[A: Eq]: Eq[Free[Combined.Program, A]] =
+  implicit def taskEq[A: Eq]: Eq[Free[Program, A]] =
     Eq.by(_.foldMap(Combined.interpreter))
 
   implicit def freeMonadErrorError: MonadError[FreeProgram, Error] = new MonadError[FreeProgram, Error] {

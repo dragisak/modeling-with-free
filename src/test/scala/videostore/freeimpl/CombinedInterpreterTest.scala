@@ -12,8 +12,8 @@ class CombinedInterpreterTest extends AnyWordSpec {
   private implicit val qtys   = Gen.choose(1, 100).label("qty")
   private implicit val movies = implicitly[Arbitrary[Movie]].arbitrary.label("movie")
 
-  private val log         = LoggingFree[Combined.Program]
-  private val videoRental = VideoRentalFree[Combined.Program]
+  private val log         = LoggingFree[Program]
+  private val videoRental = VideoRentalFree[Program]
 
   "combined interpreter" should {
     "allow me to return a rented a DVD" in forAll(movies, qtys) { (movie, qty) =>
