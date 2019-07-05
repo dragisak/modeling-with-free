@@ -1,7 +1,7 @@
 package videostore.freeimpl
 
 import cats.arrow.FunctionK
-import cats.{MonadError, ~>}
+import cats.MonadError
 import cats.free.Free
 import cats.implicits._
 
