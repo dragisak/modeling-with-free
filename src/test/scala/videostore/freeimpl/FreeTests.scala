@@ -24,9 +24,6 @@ trait FreeTests {
     }
   }
 
-  implicit def freeDSLEq[A: Eq]: Eq[Free[DSL, A]] =
-    Eq.by(_.foldMap(interpreter))
-
   implicit def freeErrorOrEq[A: Eq]: Eq[Free[ErrorOr, A]] =
     Eq.by(_.foldMap(FunctionK.id))
 
