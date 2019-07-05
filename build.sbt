@@ -9,12 +9,16 @@ scalaVersion := "2.12.8"
 val catsVersion    = "2.0.0-M4"
 val zioVersion     = "1.0.0-RC9"
 val zioCatsVersion = "1.3.1.0-RC2"
+val doobieVersion  = "0.7.0"
 
 libraryDependencies ++= Seq(
   "org.typelevel"  %% "cats-free"        % catsVersion,
   "org.typelevel"  %% "cats-effect"      % catsVersion,
   "dev.zio"        %% "zio"              % zioVersion,
   "dev.zio"        %% "zio-interop-cats" % zioCatsVersion,
+  "org.tpolecat"   %% "doobie-core"      % doobieVersion,
+  "org.tpolecat"   %% "doobie-h2"        % doobieVersion,
+  "org.tpolecat"   %% "doobie-scalatest" % doobieVersion % Test,
   "org.scalacheck" %% "scalacheck"       % "1.14.0" % Test,
   "org.scalatest"  %% "scalatest"        % "3.0.8" % Test,
   "org.typelevel"  %% "cats-testkit"     % catsVersion % Test
@@ -25,16 +29,16 @@ addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.10.3")
 scalacOptions ++= Seq(
   "-deprecation", // Emit warning and location for usages of deprecated APIs.
   "-encoding",
-  "utf-8",                            // Specify character encoding used by source files.
-  "-explaintypes",                    // Explain type errors in more detail.
-  "-feature",                         // Emit warning and location for usages of features that should be imported explicitly.
-  "-language:existentials",           // Existential types (besides wildcard types) can be written and inferred
-  "-language:experimental.macros",    // Allow macro definition (besides implementation and application)
-  "-language:higherKinds",            // Allow higher-kinded types
-  "-language:implicitConversions",    // Allow definition of implicit functions called views
-  "-unchecked",                       // Enable additional warnings where generated code depends on assumptions.
-  "-Xcheckinit",                      // Wrap field accessors to throw an exception on uninitialized access.
-  "-Xfatal-warnings",                 // Fail the compilation if there are any warnings.
+  "utf-8",                         // Specify character encoding used by source files.
+  "-explaintypes",                 // Explain type errors in more detail.
+  "-feature",                      // Emit warning and location for usages of features that should be imported explicitly.
+  "-language:existentials",        // Existential types (besides wildcard types) can be written and inferred
+  "-language:experimental.macros", // Allow macro definition (besides implementation and application)
+  "-language:higherKinds",         // Allow higher-kinded types
+  "-language:implicitConversions", // Allow definition of implicit functions called views
+  "-unchecked",                    // Enable additional warnings where generated code depends on assumptions.
+  "-Xcheckinit",                   // Wrap field accessors to throw an exception on uninitialized access.
+  // "-Xfatal-warnings",                 // Fail the compilation if there are any warnings.
   "-Xfuture",                         // Turn on future language features.
   "-Xlint:adapted-args",              // Warn if an argument list is modified to match the receiver.
   "-Xlint:by-name-right-associative", // By-name parameter of right associative operator.

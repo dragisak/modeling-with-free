@@ -10,4 +10,7 @@ package object videostore {
 
   type ErrorOr[A] = Either[Error, A]
 
+  object DVD {
+    def create: DVD = UUID.randomUUID()
+  }
 }
