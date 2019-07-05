@@ -1,6 +1,5 @@
 package videostore.freeimpl
 
-import cats.data.EitherK
 import cats.{Id, ~>}
 import videostore.ErrorOr
 

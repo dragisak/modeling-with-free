@@ -2,7 +2,7 @@ package videostore.freeimpl
 
 import cats.tests.CatsSuite
 import videostore.{ErrorOr, VideoRentalTest}
-import videostore.freeimpl.VideoRentalFree.{DSL, Interpreter}
+import videostore.freeimpl.VideoRentalFree.Interpreter
 import FreeMonadError._
 
 class VideoRentalFreeTest extends CatsSuite with FreeTests {

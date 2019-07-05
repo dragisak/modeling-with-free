@@ -49,8 +49,8 @@ trait VideoRentalLaws[F[_]] extends Laws {
 
   def findIfDvdIsAvailable(movie: Movie, qty: Int) = {
     val op = for {
-      dvds <- videoRental.addInventory(movie, qty)
-      res  <- videoRental.searchForDVD(movie)
+      _   <- videoRental.addInventory(movie, qty)
+      res <- videoRental.searchForDVD(movie)
     } yield res
 
     op.map(_.isDefined) <-> M.pure(true)

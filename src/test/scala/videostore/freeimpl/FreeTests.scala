@@ -18,8 +18,8 @@ trait FreeTests {
 
     override def prj: ErrorOr ~> Opt = new (ErrorOr ~> Opt) {
       override def apply[A](fa: ErrorOr[A]): Option[DSL[A]] = fa match {
-        case Left(err) => None // ??
-        case Right(a)  => None // ??
+        case Left(_)  => None // ??
+        case Right(_) => None // ??
       }
     }
   }
